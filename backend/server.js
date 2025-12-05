@@ -33,9 +33,22 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
-// Health check
+// Health check endpoint (must be before database init for Railway)
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.status(200).json({ 
+    status: 'ok', 
+    message: 'Milestone English API is running',
+    timestamp: new Date().toISOString() 
+  });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    status: 'ok', 
+    message: 'Milestone English API is running',
+    timestamp: new Date().toISOString() 
+  });
 });
 
 // Routes
@@ -62,17 +75,21 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-// Initialize database and start server
-db.init()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
+// Start server first (for health checks), then initialize database
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📱 Environment: ${process.env.NODE_ENV || 'development'}`);
+  
+  // Initialize database after server starts (non-blocking)
+  db.init()
+    .then(() => {
+      console.log('✅ Database connection established');
+    })
+    .catch((error) => {
+      console.error('❌ Failed to initialize database:', error);
+      console.error('⚠️  Server is running but database connection failed');
+      // Don't exit - let server run and retry connection
     });
-  })
-  .catch((error) => {
-    console.error('❌ Failed to initialize database:', error);
-    process.exit(1);
-  });
+});
 
 module.exports = app;
