@@ -1,16 +1,29 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const pool = new Pool({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'milestone_english',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-});
+// Support both connection string (NeonDB) and individual variables
+const poolConfig = process.env.DATABASE_URL || process.env.DB_URL
+  ? {
+      connectionString: process.env.DATABASE_URL || process.env.DB_URL,
+      ssl: {
+        rejectUnauthorized: false
+      },
+      max: 20,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 2000,
+    }
+  : {
+      host: process.env.DB_HOST || 'localhost',
+      port: process.env.DB_PORT || 5432,
+      database: process.env.DB_NAME || 'milestone_english',
+      user: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || 'postgres',
+      max: 20,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 2000,
+    };
+
+const pool = new Pool(poolConfig);
 
 // Test connection
 pool.on('connect', () => {
