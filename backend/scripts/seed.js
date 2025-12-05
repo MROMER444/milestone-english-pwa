@@ -1,5 +1,5 @@
-const db = require('../config/database');
 require('dotenv').config();
+const db = require('../config/database');
 
 // Sample questions for seeding
 const sampleQuestions = [
@@ -73,6 +73,9 @@ const sampleQuestions = [
 const seedQuestions = async () => {
   try {
     console.log('🌱 Seeding sample questions...');
+    
+    // Initialize database connection
+    await db.init();
 
     for (const q of sampleQuestions) {
       await db.query(
