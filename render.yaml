@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: milestone-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        sync: false
+    healthCheckPath: /health
+
+databases:
+  - name: milestone-db
+    plan: free
+    databaseName: milestone_english
+    user: milestone_user
