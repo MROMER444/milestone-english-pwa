@@ -1,0 +1,40 @@
+# Render Environment Variables
+# Copy and paste these into Render dashboard
+
+# ============================================
+# DATABASE CONNECTION (Choose ONE method)
+# ============================================
+
+# Method 1: Connection String (Recommended - Easiest)
+DATABASE_URL=postgresql://neondb_owner:npg_5qkeGRWDb3zQ@ep-gentle-fog-ag1o7z2v-pooler.c-2.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
+# OR Method 2: Individual Variables
+DB_HOST=ep-gentle-fog-ag1o7z2v-pooler.c-2.eu-central-1.aws.neon.tech
+DB_PORT=5432
+DB_NAME=neondb
+DB_USER=neondb_owner
+DB_PASSWORD=npg_5qkeGRWDb3zQ
+
+# ============================================
+# APPLICATION VARIABLES (Required)
+# ============================================
+
+NODE_ENV=production
+
+JWT_SECRET=v8Txu87yNmCYIkisOS4dmJdrvuFvsTbemx2jeOIwa3g=
+JWT_REFRESH_SECRET=32zEVHHxn8w/OGfYlPL3fbPySe4xadsfW8zSt8sm2i0=
+
+# Update this AFTER you deploy frontend to Vercel!
+FRONTEND_URL=https://milestone-english-pwa.vercel.app
+
+# ============================================
+# INSTRUCTIONS
+# ============================================
+# 1. Go to Render dashboard
+# 2. Create new Web Service
+# 3. Connect GitHub repo: milestone-english-pwa
+# 4. Root Directory: backend
+# 5. Build Command: npm install
+# 6. Start Command: npm start
+# 7. Add all environment variables above
+# 8. Deploy!
