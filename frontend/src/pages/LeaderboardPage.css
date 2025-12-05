@@ -1,0 +1,241 @@
+.leaderboard-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.leaderboard-loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+}
+
+.leaderboard-header {
+  margin-bottom: 2rem;
+}
+
+.leaderboard-header h2 {
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.period-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.period-selector button {
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text);
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.period-selector button:hover {
+  border-color: var(--primary);
+}
+
+.period-selector button.active {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white;
+  border-color: var(--primary);
+}
+
+.user-rank-card {
+  background: var(--primary-gradient);
+  color: white;
+  border-radius: var(--radius-xl);
+  padding: 3rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(244, 123, 31, 0.4), 0 4px 16px rgba(244, 123, 31, 0.3);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-rank-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.user-rank-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.user-rank-value {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.rank-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.rank-icon.gold {
+  color: #FFD700;
+}
+
+.rank-icon.silver {
+  color: #C0C0C0;
+}
+
+.rank-icon.bronze {
+  color: #CD7F32;
+}
+
+.rank-number {
+  font-size: 2rem;
+}
+
+.icon-inline {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.user-rank-details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.125rem;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.leaderboard-item {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.leaderboard-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary-gradient);
+  transform: scaleY(0);
+  transition: transform 0.4s;
+}
+
+.leaderboard-item:hover::before {
+  transform: scaleY(1);
+}
+
+.leaderboard-item:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.leaderboard-item.top-three {
+  background: linear-gradient(135deg, rgba(244, 123, 31, 0.1) 0%, rgba(242, 144, 80, 0.1) 100%);
+  border: 2px solid var(--primary);
+}
+
+.leaderboard-item.current-user {
+  background: linear-gradient(135deg, rgba(157, 198, 63, 0.2) 0%, rgba(179, 214, 96, 0.2) 100%);
+  border: 2px solid var(--accent);
+  font-weight: 600;
+}
+
+.rank {
+  font-size: 1.5rem;
+  font-weight: bold;
+  min-width: 60px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.username {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.user-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.streak {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.xp-value {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.empty-leaderboard {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  background: var(--bg-card);
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .leaderboard-item {
+    flex-wrap: wrap;
+  }
+
+  .user-rank-details {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
